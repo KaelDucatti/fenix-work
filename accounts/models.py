@@ -4,13 +4,14 @@ from django.db import models
 
 class CandidateProfile(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="cadidate_profile"
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="cadidate_profiles"
     )
     social_name = models.CharField(max_length=200)
     pronums = models.CharField(max_length=50, blank=True, null=True)
     bio = models.TextField()
     resume = models.FileField(upload_to="resumes/", blank=True, null=True)
+    phone = models.CharField(max_length=30, blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
     github = models.URLField(blank=True, null=True)
     behance = models.URLField(blank=True, null=True)
@@ -27,8 +28,8 @@ class CandidateProfile(models.Model):
 
 class Enterprise(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="enterprise"
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="enterprises"
     )
     name = models.CharField(max_length=200)
     site = models.URLField(blank=True, null=True)
